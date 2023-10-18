@@ -1,11 +1,12 @@
-import Header from "./components/Header"
+import Navbar from "./components/navbar"
+import PageRouter from "./router/PageRouter"
 
 function App() {
   return (
-    <div>
-      <Header />
-      <h1>App</h1>
-    </div>
+    <main>
+      <Navbar />
+      <PageRouter />
+    </main>
   )
 }
 
