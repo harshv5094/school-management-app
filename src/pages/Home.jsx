@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react"
 import Main from "../components/body"
 
-function TeacherView() {
+function Home() {
   return (
     <Main>
       <Box
@@ -10,10 +10,11 @@ function TeacherView() {
         alignItems={`center`}
         textAlign={`center`}
         fontSize={`30px`}>
-        This is the Teacher's View
+        Welcome to St. Paul School's Management Portal
       </Box>
+
     </Main>
   )
 }
 
-export default TeacherView
+export default Home
