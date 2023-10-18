@@ -4,7 +4,7 @@ import axios from 'axios'
 export const fetchStudentsInformation = createAsyncThunk(
   'students/fetchInfo',
   async () => {
-    const response = await axios(
+    const response = await axios.get(
       'https://school-management-api.harshv1741.repl.co/students'
     )
     console.log(response.data)
