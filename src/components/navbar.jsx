@@ -1,5 +1,5 @@
 import { HamburgerIcon } from "@chakra-ui/icons"
-import { Box, Container, IconButton, Link, Menu, MenuButton, MenuItem, MenuList, Stack, useColorModeValue } from "@chakra-ui/react"
+import { Box, Container, IconButton, Link, Menu, MenuButton, MenuItem, MenuList, Stack } from "@chakra-ui/react"
 import { forwardRef } from "react"
 import { NavLink as ReactRouterLink } from "react-router-dom"
 import { IoLogoGithub } from 'react-icons/io5'
@@ -22,7 +22,6 @@ function Navbar() {
     <Box
       position={`fixed`}
       as="nav"
-      bg={useColorModeValue('#ffffff40', '#20202380')}
       w={`100%`}
       wrap={`wrap`}
       zIndex={2}
