@@ -37,8 +37,6 @@ function StudentModal() {
       attendance: attendance,
     }
 
-    console.log(studentData)
-
     if (student) {
       dispatch(updateStudentInformation({ id: student._id, studentData: studentData }))
       toast({
@@ -47,17 +45,15 @@ function StudentModal() {
         status: "success",
         duration: 3000,
       })
-      setTimeout(() => window.location.reload(), 4000)
     }
     else {
       dispatch(addStudentInformation(studentData))
       toast({
         title: 'New Student Added Successfully.',
-        description: `${name} data is added in the server`,
+        description: `${name} data is added in the server. Reloading the webpage`,
         status: "success",
         duration: 2000,
       })
-      setTimeout(() => window.location.reload(), 2000)
     }
   }
 

@@ -70,7 +70,7 @@ export const studentReducer = createSlice({
     },
     [addStudentInformation.fulfilled]: (state, action) => {
       state.status = 'success'
-      state.students.push(action.payload)
+      state.students.push(action.payload.students)
     },
     [addStudentInformation.rejected]: (state, action) => {
       state.status = 'error'
@@ -81,15 +81,26 @@ export const studentReducer = createSlice({
     },
     [updateStudentInformation.fulfilled]: (state, action) => {
       state.status = 'success'
-      const index = state.students.findIndex(
-        x => x.id === action.payload.students._id
-      )
-
+      const updatedStudent = action.payload.students
+      const index = state.students.findIndex(x => x._id === updatedStudent._id)
       if (index !== -1) {
-        state.students[index] = action.payload.student
+        state.students[index] = action.payload.students
       }
     },
     [updateStudentInformation.rejected]: (state, action) => {
+      state.status = 'error'
+      state.error = action.error.message
+    },
+    [deleteStudentInformation.pending]: state => {
+      state.status = 'loading'
+    },
+    [deleteStudentInformation.fulfilled]: (state, action) => {
+      state.status = 'success'
+      state.students = state.students.filter(
+        student => student._id !== action.payload.students._id
+      )
+    },
+    [deleteStudentInformation.rejected]: (state, action) => {
       state.status = 'error'
       state.error = action.error.message
     }

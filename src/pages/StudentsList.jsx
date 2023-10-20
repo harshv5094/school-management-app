@@ -75,8 +75,6 @@ function StudentsList() {
                                   duration: 3000,
                                   status: `success`,
                                 })
-                                setTimeout(() => window.location.reload(), 3000);
-
                               }} >Delete</Button>
                           </Td>
                         </Tr>
