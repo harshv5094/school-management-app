@@ -1,10 +1,11 @@
-import { Box, Container, TableContainer, Table, Thead, Tr, Td, Tbody, } from "@chakra-ui/react"
+import { Box, Container, TableContainer, Table, Thead, Tr, Td, Tbody, Button, } from "@chakra-ui/react"
 import { useEffect } from 'react';
 import Main from "../components/body"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchTeachersInformation } from "../features/teacherReducer";
 import Loading from "../components/loading-spinner";
 import Error from "../components/error-box";
+import { NavLink } from "react-router-dom";
 
 function TeachersList() {
   const dispatch = useDispatch()
@@ -36,17 +37,13 @@ function TeachersList() {
             </Container>
 
             <TableContainer marginTop={`2rem`} overflow={`auto`}>
-              <Table variant={`striped`} colorScheme="red">
+              <Table variant={`striped`} colorScheme="teal">
                 <Thead>
                   <Tr>
                     <Td>Name</Td>
                     <Td isNumeric>Age</Td>
                     <Td>Gender</Td>
-                    <Td>Class Teacher Of</Td>
-                    <Td>Subject Incharge</Td>
-                    <Td isNumeric>Salary</Td>
-                    <Td isNumeric>Phone Number</Td>
-                    <Td>Address</Td>
+                    <Td>Actions</Td>
                   </Tr>
                 </Thead>
                 <Tbody>
@@ -57,11 +54,9 @@ function TeachersList() {
                           <Td>{item.name}</Td>
                           <Td isNumeric>{item.age}</Td>
                           <Td>{item.gender}</Td>
-                          <Td>{item.classTeacherOf}</Td>
-                          <Td>{item.subjectIncharge.join(", ")}</Td>
-                          <Td isNumeric>{item.salary}</Td>
-                          <Td isNumeric>{item.phoneNumber}</Td>
-                          <Td>{item.address}</Td>
+                          <Td>
+                            <Button as={NavLink} mx={1} to={`/teachers/${item._id}`} variant={`ghost`} colorScheme="yellow" size={`sm`}>View</Button>
+                          </Td>
                         </Tr>
                       )
                     })
