@@ -41,7 +41,7 @@ function StudentModal() {
       dispatch(updateStudentInformation({ id: student._id, studentData: studentData }))
       toast({
         title: 'Information Updated.',
-        description: `${name} data is updated on the server. Reloading the page`,
+        description: `${name} data is updated on the server.`,
         status: "success",
         duration: 3000,
       })
@@ -50,9 +50,9 @@ function StudentModal() {
       dispatch(addStudentInformation(studentData))
       toast({
         title: 'New Student Added Successfully.',
-        description: `${name} data is added in the server. Reloading the webpage`,
+        description: `${name} data is added in the server.`,
         status: "success",
-        duration: 2000,
+        duration: 3000,
       })
     }
   }
@@ -152,8 +152,22 @@ function StudentModal() {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="green" mx={1} onClick={handleSubmit} leftIcon={student ? <IoSave /> : <PlusSquareIcon />}>{student ? "Save" : "Add"}</Button>
-            <Button colorScheme="red" variant={`ghost`} mx={1} onClick={onClose} leftIcon={<IoClose />}>Close</Button>
+            <Button
+              colorScheme="green"
+              mx={1}
+              onClick={handleSubmit}
+              leftIcon={student ? <IoSave /> : <PlusSquareIcon />}>
+              {student ? "Save" : "Add"}
+            </Button>
+
+            <Button
+              colorScheme="red"
+              variant={`ghost`}
+              mx={1}
+              onClick={onClose}
+              leftIcon={<IoClose />}>
+              Close
+            </Button>
           </ModalFooter>
 
         </ModalContent>
