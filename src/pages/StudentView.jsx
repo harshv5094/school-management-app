@@ -1,14 +1,20 @@
-import { Box, Container, Table, TableContainer, Tbody, Td, Thead, Tr } from "@chakra-ui/react"
+import { Box, Button, Container, HStack, VStack } from "@chakra-ui/react"
 import Main from "../components/body"
+import { NavLink, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchStudentsInformation } from "../features/studentReducer"
-import { useEffect } from "react"
+import { ArrowBackIcon } from "@chakra-ui/icons"
+import StudentModal from "../components/student-modal"
 import Loading from "../components/loading-spinner"
+import { useEffect } from "react"
+import { fetchStudentsInformation } from "../features/studentReducer"
 import Error from "../components/error-box"
 
+
 function StudentView() {
-  const dispatch = useDispatch()
-  const { students, status, error } = useSelector(state => state.students)
+  let dispatch = useDispatch()
+  let { studentID } = useParams()
+  let { students, status, error } = useSelector(state => state.students)
+  const filteredData = students.find(x => x._id === studentID)
 
   useEffect(() => {
     if (status === "idle") {
@@ -18,59 +24,83 @@ function StudentView() {
 
   return (
     <Main>
-      {status === "loading" && <Loading />}
-      {status === "success" &&
-        (
-          <Box
-            mt={`3.6rem`}
-            display={`flex`}
-            flexDir={`column`}
-            alignItems={`center`}
-          >
+      <Box
+        mt={`3.6rem`}
+        display={`flex`}
+        flexDir={`column`}
+        justifyContent={`center`}
+        alignItems={`center`}
+      >
+        {status === "loading" && <Loading />}
+        {status === "success" && (
+          <Box>
+
             <Container
+              marginBottom={`2rem`}
               textAlign={`center`}
               fontSize={`30px`}
-              fontWeight={`500`}
             >
-              Students List
+              Student Details
             </Container>
 
-            <TableContainer marginTop={`2rem`} overflow={`auto`}>
-              <Table variant={`striped`} colorScheme="red">
-                <Thead>
-                  <Tr>
-                    <Td>Name</Td>
-                    <Td>Gender</Td>
-                    <Td>Standard</Td>
-                    <Td>Emergency Number</Td>
-                    <Td>Address</Td>
-                    <Td>Marks (Out of 100)</Td>
-                    <Td>Attendance (in %)</Td>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  {
-                    students.map((item, index) => {
-                      return (
-                        <Tr key={index}>
-                          <Td>{item.name}</Td>
-                          <Td>{item.gender}</Td>
-                          <Td>{item.standard}</Td>
-                          <Td>{item.emergencyNumber}</Td>
-                          <Td>{item.address}</Td>
-                          <Td>{item.marks}</Td>
-                          <Td>{item.attendance}</Td>
-                        </Tr>
-                      )
-                    })
-                  }
-                </Tbody>
-              </Table>
+            <VStack>
+              <Box>
+                <b style={{ fontSize: "20px" }}>Name:</b>{" "}
+                <span style={{ fontSize: "18px" }}>
+                  {filteredData.name}
+                </span>
+                <br />
+                <b style={{ fontSize: "20px" }}>Age:</b>{" "}
+                <span style={{ fontSize: "18px" }}>
+                  {filteredData.age}
+                </span>
+                <br />
+                <b style={{ fontSize: "20px" }}>Gender:</b>{" "}
+                <span style={{ fontSize: "18px" }}>
+                  {filteredData.gender}
+                </span>
+                <br />
+                <b style={{ fontSize: "20px" }}>Standard:</b>{" "}
+                <span style={{ fontSize: "18px" }}>
+                  {filteredData.standard}
+                </span>
+                <br />
+                <b style={{ fontSize: "20px" }}>Address:</b>{" "}
+                <span style={{ fontSize: "18px" }}>
+                  {filteredData.address}
+                </span>
+                <br />
+                <b style={{ fontSize: "20px" }}>Emergency Number:</b>{" "}
+                <span style={{ fontSize: "18px" }}>
+                  {filteredData.emergencyNumber}
+                </span>
+                <br />
+                <b style={{ fontSize: "20px" }}>Marks:</b>{" "}
+                <span style={{ fontSize: "18px" }}>
+                  {filteredData.marks}{"/100"}
+                </span>
+                <br />
+                <b style={{ fontSize: "20px" }}>Attendance:</b>{" "}
+                <span style={{ fontSize: "18px" }}>
+                  {filteredData.attendance}{" %"}
+                </span>
+              </Box>
+            </VStack>
 
-            </TableContainer>
+            <HStack
+              mt={`2rem`}
+              ml={`2rem`}
+            >
+              <Button leftIcon={<ArrowBackIcon />} colorScheme="yellow" as={NavLink} to={"/students"}>
+                Go Back
+              </Button>
+              <StudentModal />
+            </HStack>
+
           </Box>
         )}
-      {status === "error" && <Error message={error} />}
+        {status === "error" && <Error message={error} />}
+      </Box>
     </Main>
   )
 }
