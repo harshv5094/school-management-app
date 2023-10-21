@@ -44,6 +44,7 @@ function StudentModal() {
         description: `${name} data is updated on the server.`,
         status: "success",
         duration: 3000,
+        isClosable: true
       })
     }
     else {
@@ -53,6 +54,7 @@ function StudentModal() {
         description: `${name} data is added in the server.`,
         status: "success",
         duration: 3000,
+        isClosable: true
       })
     }
   }
@@ -91,6 +93,8 @@ function StudentModal() {
               mb={2}
               type="number"
               value={age}
+              min="6"
+              max="18"
               onChange={(e) => setAge(e.target.value)}
             />
 
@@ -130,6 +134,7 @@ function StudentModal() {
               mb={2}
               type="text"
               value={emergencyNumber}
+              max="10"
               onChange={e => setEmergencyNumber(e.target.value)}
             />
 
@@ -138,6 +143,8 @@ function StudentModal() {
               mb={2}
               type="number"
               value={marks}
+              min="0"
+              max="100"
               onChange={(e) => setMarks(e.target.value)}
             />
 
@@ -146,6 +153,8 @@ function StudentModal() {
               mb={2}
               type="number"
               value={attendance}
+              min="0"
+              max="100"
               onChange={(e) => setAttendance(e.target.value)}
             />
 
