@@ -7,6 +7,7 @@ import Loading from "../components/loading-spinner"
 import Error from "../components/error-box"
 import { NavLink } from "react-router-dom"
 import StudentModal from "../components/student-modal"
+import DeleteDialog from "../components/delete-dialog-box"
 
 function StudentsList() {
   const toast = useToast()
@@ -63,19 +64,16 @@ function StudentsList() {
                           <Td>{item.standard}</Td>
                           <Td>
                             <Button as={NavLink} mx={1} to={`/students/${item._id}`} variant={`ghost`} colorScheme="yellow" size={`sm`}>View</Button>
-                            <Button
-                              mx={1}
-                              variant={`ghost`}
-                              colorScheme={`red`}
-                              onClick={() => {
-                                dispatch(deleteStudentInformation(item._id))
-                                toast({
-                                  title: 'Student Information is Deleted.',
-                                  description: `Information of Student '${item.name}' is successfully deleted from the database.`,
-                                  duration: 3000,
-                                  status: `success`,
-                                })
-                              }} >Delete</Button>
+                            <DeleteDialog dialogTitle={"Delete Student Information"} deleteFunction={() => {
+                              dispatch(deleteStudentInformation(item._id))
+                              toast({
+                                title: 'Student Information is Deleted.',
+                                description: `Information of Student '${item.name}' is successfully deleted from the database.`,
+                                duration: 3000,
+                                status: `success`,
+                                isClosable: true
+                              })
+                            }} />
                           </Td>
                         </Tr>
                       )
